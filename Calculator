@@ -1,1 +1,20 @@
+document.getElementById('calculator-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const totalArtists = parseInt(document.getElementById('total_artists').value, 10);
+    const dudRevenue = parseInt(document.getElementById('dud_revenue').value, 10);
+    const midTierRevenue = parseInt(document.getElementById('mid_tier_revenue').value, 10);
+
+    // Assuming fixed values for Pablos, Giegers, and Stones
+    const giegers = 10;
+    const stones = 20;
+    const duds = Math.round(totalArtists * 0.7);
+    const workingArtists = Math.round(totalArtists * 0.2);
+    const topArtists = totalArtists - (duds + workingArtists);
+    const pablos = topArtists - giegers - stones;
+
+    const totalRevenue = pablos * 65000000 + giegers * 25000000 + stones * 15000000 + duds * dudRevenue + workingArtists * midTierRevenue;
+    const ventureEarnings = (totalRevenue * 0.2) + ((duds * dudRevenue + workingArtists * midTierRevenue) * 0.4);
+
+    document.getElementById('results').innerHTML = `Venture Earnings: $${ventureEarnings.toLocaleString()}`;
+});
 
